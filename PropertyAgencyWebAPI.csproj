@@ -243,6 +243,7 @@
     <Compile Include="Models\Entities\RealEstateType.cs">
       <DependentUpon>PropertyAgencyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Responses\ResponseEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

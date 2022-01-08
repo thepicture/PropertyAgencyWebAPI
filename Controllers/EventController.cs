@@ -1,5 +1,7 @@
 ﻿using PropertyAgencyWebAPI.Models.Entities;
+using PropertyAgencyWebAPI.Models.Responses;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -14,13 +16,37 @@ namespace PropertyAgencyWebAPI.Controllers
         private readonly PropertyAgencyBaseEntities db =
             new PropertyAgencyBaseEntities();
 
-        // GET: api/Events
-        public IQueryable<Event> GetEvent()
+        // GET: /events?agent_id=1&from=1533556900&to=1533558000 
+        [Route("events")]
+        [ResponseType(typeof(List<ResponseEvent>))]
+        public IHttpActionResult GetEvents(int agent_id, long from, long to)
         {
-            return db.Event;
+            if (!db.Agent.Any(a => a.Id == agent_id))
+            {
+                return Content(HttpStatusCode.BadRequest,
+                               new { error = "invalid agent id" });
+            }
+
+            if (from >= to)
+            {
+                return Content(HttpStatusCode.BadRequest,
+                               new
+                               {
+                                   error = "'from' UNIX timestamp " +
+                                   "must be less than 'to' UNIX timestamp"
+                               });
+            }
+
+            List<ResponseEvent> events =
+                db.Event
+                  .Where(e => e.DateTime >= from
+                              && e.DateTime <= to && e.AgentId == agent_id)
+                  .ToList()
+                  .ConvertAll(e => new ResponseEvent(e));
+            return Ok(events);
         }
 
-        // GET: api/Events/5
+        // GET: /event/5
         [ResponseType(typeof(Event))]
         public IHttpActionResult GetEvent(int id)
         {
@@ -33,7 +59,7 @@ namespace PropertyAgencyWebAPI.Controllers
             return Ok(@event);
         }
 
-        // PUT: api/Events/5
+        // PUT: /event/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutEvent(string id, Event @event)
         {
@@ -74,7 +100,7 @@ namespace PropertyAgencyWebAPI.Controllers
         // &type=meeting
         // &duration=60
         // &comment=comment
-        [ResponseType(typeof(Event))]
+        [ResponseType(typeof(ResponseEvent))]
         public IHttpActionResult PostEvent(int agent_id,
                                            long dateTime,
                                            string type,
@@ -133,21 +159,13 @@ namespace PropertyAgencyWebAPI.Controllers
                 Comment = comment
             };
 
-            db.Event.Add(@event);
-            db.SaveChanges();
+            _ = db.Event.Add(@event);
+            _ = db.SaveChanges();
 
-            return Ok(new
-            {
-                uuid = @event.UUID,
-                agent_id = @event.AgentId,
-                datetime = @event.DateTime,
-                duration = @event.DurationInSeconds,
-                type = @event.EventType.EventTypeName,
-                comment = @event.Comment
-            });
+            return Ok(new ResponseEvent(@event));
         }
 
-        // DELETE: event?agent_id=1&event_uuid=64ee002a
+        // DELETE: /event?agent_id=1&event_uuid=64ee002a
         [ResponseType(typeof(Event))]
         public IHttpActionResult DeleteEvent(int agent_id, string event_uuid)
         {
