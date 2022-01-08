@@ -68,7 +68,12 @@ namespace PropertyAgencyWebAPI.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Events
+        // POST:
+        // /event?agent_id=1
+        // &datetime=25
+        // &type=meeting
+        // &duration=60
+        // &comment=comment
         [ResponseType(typeof(Event))]
         public IHttpActionResult PostEvent(int agent_id,
                                            long dateTime,
@@ -142,20 +147,39 @@ namespace PropertyAgencyWebAPI.Controllers
             });
         }
 
-        // DELETE: api/Events/5
+        // DELETE: event?agent_id=1&event_uuid=64ee002a
         [ResponseType(typeof(Event))]
-        public IHttpActionResult DeleteEvent(int id)
+        public IHttpActionResult DeleteEvent(int agent_id, string event_uuid)
         {
-            Event @event = db.Event.Find(id);
+            Event @event = db.Event
+                .FirstOrDefault(e => e.UUID == event_uuid
+                                     && e.AgentId == agent_id);
             if (@event == null)
             {
-                return NotFound();
+                return Content(HttpStatusCode.NotFound,
+                             new
+                             {
+                                 error = "the given "
+                                 + "event_uuid and agent_id pair "
+                                 + "did not determine "
+                                 + "an existing event"
+                             });
             }
 
-            db.Event.Remove(@event);
+            _ = db.Event.Remove(@event);
             db.SaveChanges();
 
-            return Ok(@event);
+            return Ok(new
+            {
+                uuid = @event.UUID,
+                agent_id = @event.AgentId,
+                datetime = @event.DateTime,
+                duration = @event.DurationInSeconds,
+                type = db.EventType
+                .First(e => e.EventTypeId == @event.EventTypeId)
+                .EventTypeName,
+                comment = @event.Comment
+            });
         }
 
         protected override void Dispose(bool disposing)
