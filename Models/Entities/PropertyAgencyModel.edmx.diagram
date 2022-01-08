@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b08e7d3c32c94e2e8f1d6a2ce267a0dd" Name="Diagram1">
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.Agent" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.Apartment" Width="1.5" PointX="6" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.ApartmentDemand" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.BuildingDemand" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.City" Width="1.5" PointX="1.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.Client" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.Deal" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.Demand" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.District" Width="1.5" PointX="1.5" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.DistrictPolygon" Width="1.5" PointX="3.75" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.Event" Width="1.5" PointX="6" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.EventType" Width="1.5" PointX="3.75" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.House" Width="1.5" PointX="6" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.HouseDemand" Width="1.5" PointX="7.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.Land" Width="1.5" PointX="6" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.LandDemand" Width="1.5" PointX="5.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.Offer" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.Property" Width="1.5" PointX="3.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.PropertyAddress" Width="1.5" PointX="1.5" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PropertyAgencyBaseModel.RealEstateType" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Demand_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Event_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Offer_Agent" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Apartment_Property" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_ApartmentDemand_BuildingDemand" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_BuildingDemand_Demand" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_HouseDemand_BuildingDemand" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_PropertyAddress_City" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Demand_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Offer_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Deal_Demand" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Deal_Offer" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Demand_PropertyAddress" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Demand_RealEstateType" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_LandDemand_Demand" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_DistrictPolygon_District" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_PropertyAddress_District" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Event_EventType" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_House_Property" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Land_Property" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Offer_Property" ManuallyRouted="false" />
+        <AssociationConnector Association="PropertyAgencyBaseModel.FK_Property_PropertyAddress" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
